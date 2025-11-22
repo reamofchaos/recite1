@@ -1,0 +1,171 @@
+<view class="wordlist-detail-container">
+  <!-- 导航栏 -->
+  <view class="navigation-bar">
+    <view class="nav-left" bindtap="goBack">
+      <view class="back-icon">‹</view>
+    </view>
+    <view class="nav-title">{{wordList ? wordList.name : '词库详情'}}</view>
+    <view class="nav-right">
+      <button class="import-btn" bindtap="importWordList">导入</button>
+    </view>
+    <!-- 底部空间，确保最后一个项目不被底部操作栏遮挡 -->
+    <view class="list-bottom-space"></view>
+  </view>
+
+  <!-- 词库信息 -->
+  <view class="wordlist-info" wx:if="{{wordList}}">
+    <view class="info-item">
+        <text class="info-label">创建时间：</text>
+        <text class="info-value">{{wordList.formattedCreateTime || '未知'}}</text>
+      </view>
+    <view class="info-item">
+      <text class="info-label">单词数量：</text>
+      <text class="info-value">{{words.length}} 个</text>
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading-container" wx:if="{{isLoading}}">
+    <view class="loading-spinner"></view>
+    <view class="loading-text">加载中...</view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!isLoading && words.length === 0}}">
+    <view class="empty-icon">📝</view>
+    <view class="empty-title">暂无单词</view>
+    <view class="empty-desc">点击下方按钮添加您的第一个单词</view>
+  </view>
+
+  <!-- 单词列表 -->
+  <scroll-view 
+    class="words-list" 
+    wx:if="{{!isLoading && words.length > 0}}"
+    scroll-y="true"
+    enable-back-to-top="true"
+    scroll-with-animation="true"
+  >
+    <view 
+      class="word-item" 
+      wx:for="{{words}}" 
+      wx:key="index"
+      wx:for-index="index"
+      wx:for-item="word"
+    >
+      <view class="word-content">
+        <view class="word-index">{{index + 1}}</view>
+        <view class="word-info">
+          <view class="word-text">{{word.text}}</view>
+          <view class="word-translation">{{word.translation}}</view>
+        </view>
+      </view>
+      <view class="word-actions">
+        <button class="action-btn edit" bindtap="showEditWordModal" data-index="{{index}}">编辑</button>
+        <button class="action-btn delete" type="warn" bindtap="deleteWord" data-index="{{index}}">删除</button>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <button class="add-word-btn" type="primary" bindtap="showAddWordModal">
+      + 添加单词
+    </button>
+    <button class="import-wordlist-btn" bindtap="showImportWordListModal">
+      导入词库
+    </button>
+  </view>
+
+  <!-- 导入词库弹窗 -->
+  <view class="modal-overlay" wx:if="{{showImportWordListModal}}" bindtap="cancelImportWordList"></view>
+  <view class="modal-container" wx:if="{{showImportWordListModal}}">
+    <view class="modal-header">
+      <view class="modal-title">导入词库</view>
+    </view>
+    <view class="modal-body">
+      <view class="form-item">
+        <text class="form-label">选择词库：</text>
+      </view>
+      <view class="wordlist-select">
+        <view 
+          class="wordlist-option" 
+          wx:for="{{availableWordLists}}" 
+          wx:key="id"
+          bindtap="selectWordListToImport" 
+          data-id="{{item.id}}"
+        >
+          <view class="wordlist-option-name">{{item.name}}</view>
+          <view class="wordlist-option-count">{{item.words.length}} 个单词</view>
+        </view>
+      </view>
+    </view>
+    <view class="modal-footer">
+      <button class="modal-btn cancel" bindtap="cancelImportWordList">取消</button>
+    </view>
+  </view>
+
+  <!-- 新增单词弹窗 -->
+  <view class="modal-overlay" wx:if="{{showAddWordModal}}" bindtap="cancelAddWord"></view>
+  <view class="modal-container" wx:if="{{showAddWordModal}}">
+    <view class="modal-header">
+      <view class="modal-title">新增单词</view>
+    </view>
+    <view class="modal-body">
+      <view class="form-item">
+        <text class="form-label">单词：</text>
+        <input 
+          class="form-input" 
+          placeholder="请输入单词" 
+          value="{{newWordText}}" 
+          bindinput="onNewWordTextInput"
+          focus
+        />
+      </view>
+      <view class="form-item">
+        <text class="form-label">翻译：</text>
+        <input 
+          class="form-input" 
+          placeholder="请输入翻译" 
+          value="{{newWordTranslation}}" 
+          bindinput="onNewWordTranslationInput"
+        />
+      </view>
+  <view class="modal-footer">
+      <button class="modal-btn cancel" bindtap="cancelAddWord">取消</button>
+      <button class="modal-btn confirm" type="primary" bindtap="confirmAddWord">确认</button>
+    </view>
+  </view>
+
+  <!-- 编辑单词弹窗 -->
+  <view class="modal-overlay" wx:if="{{showEditWordModal}}" bindtap="cancelEditWord"></view>
+  <view class="modal-container" wx:if="{{showEditWordModal}}">
+    <view class="modal-header">
+      <view class="modal-title">编辑单词</view>
+    </view>
+    <view class="modal-body">
+      <view class="form-item">
+        <text class="form-label">单词：</text>
+        <input 
+          class="form-input" 
+          placeholder="请输入单词" 
+          value="{{editWordText}}" 
+          bindinput="onEditWordTextInput"
+        />
+      </view>
+      <view class="form-item">
+        <text class="form-label">翻译：</text>
+        <input 
+          class="form-input" 
+          placeholder="请输入翻译" 
+          value="{{editWordTranslation}}" 
+          bindinput="onEditWordTranslationInput"
+        />
+      </view>
+    </view>
+  </view>
+  <view class="modal-footer">
+      <button class="modal-btn cancel" bindtap="cancelEditWord">取消</button>
+      <button class="modal-btn confirm" type="primary" bindtap="confirmEditWord">确认</button>
+    </view>
+  </view>
+</view>

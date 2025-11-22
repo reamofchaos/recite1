@@ -1,0 +1,125 @@
+<view class="container page-scrollable">
+  <!-- 隐藏的canvas用于图片裁剪，设置较大的默认尺寸以适应各种裁剪需求 -->
+  <canvas id="cropCanvas" canvas-id="cropCanvas" style="position: fixed; left: -9999px; width: 1000px; height: 1000px;"></canvas>
+  <navigation-bar title="拍照识词" back="{{true}}" color="white" background="rgba(0,0,0,0.5)" bind:back="handleBack"></navigation-bar>
+  
+  <camera 
+    class="camera" 
+    device-position="back" 
+    flash="off"
+    binderror="onCameraError">
+  </camera>
+
+  <view class="controls">
+    <view class="control-item" bindtap="chooseImage">
+      <view class="control-icon">🖼️</view>
+      <text class="control-text">相册</text>
+    </view>
+    
+    <view class="capture-btn" bindtap="takePhoto">
+      <view class="capture-inner"></view>
+    </view>
+    
+    <view class="control-item" bindtap="toggleFlash">
+      <view class="control-icon">{{flashOn ? '🔦' : '💡'}}</view>
+      <text class="control-text">闪光灯</text>
+    </view>
+  </view>
+
+  <!-- 识别结果弹窗 -->
+  <view class="modal {{showResult ? 'show' : ''}}" bindtap="hideResult">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">识别结果</text>
+        <view class="close-btn" bindtap="hideResult">×</view>
+      </view>
+      
+      <scroll-view class="word-list" scroll-y style="height: 500rpx;">
+        <!-- 单词列表 -->
+        <view wx:if="{{recognizedWords.length > 0}}">
+          <view class="word-item" wx:for="{{recognizedWords}}" wx:key="index">
+            <text class="word-text">{{item.text}}</text>
+            <text class="word-translation">{{item.translation}}</text>
+          </view>
+        </view>
+        <!-- 空状态提示 -->
+        <view wx:else class="empty-state">
+          <text>暂无识别结果</text>
+        </view>
+      </scroll-view>
+      
+      <view class="modal-actions">
+        <button class="btn-secondary" bindtap="hideResult">重新拍照</button>
+        <button class="btn-primary" bindtap="saveWords">保存单词</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 图片编辑界面 -->
+  <view class="image-editor {{showEditor ? 'show' : ''}}">
+    <view class="editor-header">
+      <text class="editor-title">编辑图片</text>
+      <view class="close-btn" bindtap="closeImageEditor">×</view>
+    </view>
+    
+    <view class="editor-content">
+      <!-- 简化图片容器，使用固定大小并允许滚动 -->
+      <view class="image-container" style="max-height: 70vh; position: relative; width: 100%;">
+        <!-- 简化图片显示，使用widthFix模式确保图片完整显示 -->
+        <image 
+          src="{{currentImagePath}}" 
+          mode="widthFix" 
+          class="preview-image" 
+          style="width: 100%; display: block;"
+          bindload="onImageLoad"
+        ></image>
+        
+        <!-- 裁剪框使用百分比定位，添加明显的边框样式 -->
+        <view class="crop-box" 
+              style="position: absolute; left: {{cropRect.x}}%; top: {{cropRect.y}}%; width: {{cropRect.width}}%; height: {{cropRect.height}}%; border: 2px dashed #007AFF; background-color: rgba(0, 122, 255, 0.1);" 
+              catchtouchstart="onCropBoxTouchStart" catchtouchmove="onCropBoxTouchMove">
+        </view>
+        
+        <!-- 四个角的控制点，使用最小尺寸 -->
+        <view class="crop-corner top-left" 
+              style="position: absolute; width: 30px; height: 30px; left: {{cropRect.x - 15 / (screenWidth / 100)}}%; top: {{cropRect.y - 15 / (screenHeight / 100)}}%; z-index: 10; background-color: rgba(0, 122, 255, 0.8); border-radius: 4px;" 
+              catchtouchstart="onCropBoxTouchStart" 
+              catchtouchmove="onCropBoxTouchMove" 
+              data-corner="top-left"></view>
+        
+        <view class="crop-corner top-right" 
+              style="position: absolute; width: 30px; height: 30px; left: {{(cropRect.x + cropRect.width) - 15 / (screenWidth / 100)}}%; top: {{cropRect.y - 15 / (screenHeight / 100)}}%; z-index: 10; background-color: rgba(0, 122, 255, 0.8); border-radius: 4px;" 
+              catchtouchstart="onCropBoxTouchStart" 
+              catchtouchmove="onCropBoxTouchMove" 
+              data-corner="top-right"></view>
+        
+        <view class="crop-corner bottom-left" 
+              style="position: absolute; width: 30px; height: 30px; left: {{cropRect.x - 15 / (screenWidth / 100)}}%; top: {{(cropRect.y + cropRect.height) - 15 / (screenHeight / 100)}}%; z-index: 10; background-color: rgba(0, 122, 255, 0.8); border-radius: 4px;" 
+              catchtouchstart="onCropBoxTouchStart" 
+              catchtouchmove="onCropBoxTouchMove" 
+              data-corner="bottom-left"></view>
+        
+        <view class="crop-corner bottom-right" 
+              style="position: absolute; width: 30px; height: 30px; left: {{(cropRect.x + cropRect.width) - 15 / (screenWidth / 100)}}%; top: {{(cropRect.y + cropRect.height) - 15 / (screenHeight / 100)}}%; z-index: 10; background-color: rgba(0, 122, 255, 0.8); border-radius: 4px;" 
+              catchtouchstart="onCropBoxTouchStart" 
+              catchtouchmove="onCropBoxTouchMove" 
+              data-corner="bottom-right"></view>
+      </view>
+    </view>
+    
+    <view class="editor-footer">
+      <button class="btn-secondary" bindtap="closeImageEditor">取消</button>
+      <button class="btn-primary" bindtap="confirmCrop">确认上传</button>
+    </view>
+  </view>
+
+  <!-- 加载提示 -->
+  <view class="loading {{loading ? 'show' : ''}}" bindtap="stopPropagation">
+    <view class="loading-content">
+      <view class="spinner"></view>
+      <text class="loading-text">正在识别中...</text>
+    </view>
+  </view>
+  
+
+</view>

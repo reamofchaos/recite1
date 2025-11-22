@@ -1,0 +1,95 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.content {
+  padding: 20rpx;
+}
+
+.header {
+  text-align: center;
+  margin: 60rpx 0;
+  color: white;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  opacity: 0.8;
+}
+
+.feature-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+  margin: 60rpx 0;
+}
+
+.card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.card:active {
+  transform: scale(0.98);
+}
+
+.card-icon {
+  font-size: 60rpx;
+  margin-right: 30rpx;
+}
+
+.card-content {
+  flex: 1;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.card-desc {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20rpx;
+  padding: 40rpx 20rpx;
+  margin-top: 40rpx;
+}
+
+.stat-item {
+  text-align: center;
+  color: white;
+}
+
+.stat-number {
+  font-size: 36rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  opacity: 0.8;
+}

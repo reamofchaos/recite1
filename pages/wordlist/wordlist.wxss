@@ -1,0 +1,674 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+.wordlist-page-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部工具栏 */
+.toolbar {
+  padding: 15rpx;
+  background-color: #fff;
+  display: flex;
+  gap: 10rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.toolbar button {
+  flex: 1;
+  margin: 0;
+  font-size: 28rpx;
+}
+
+.add-btn {
+  background-color: #07c160;
+  color: white;
+}
+
+.merge-btn {
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+/* 词库列表 */
+.wordlist-scroll {
+  flex: 1;
+  padding: 20rpx;
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  color: #333;
+}
+
+.wordlist-item {
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.item-content {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.item-icon {
+  font-size: 60rpx;
+  margin-right: 20rpx;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.item-stats {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.item-arrow {
+  font-size: 40rpx;
+  color: #ccc;
+}
+
+.item-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15rpx 30rpx;
+  gap: 15rpx;
+  background-color: #fafafa;
+}
+
+.action-btn {
+  font-size: 26rpx;
+  padding: 0 20rpx;
+  margin: 0;
+  line-height: 50rpx;
+}
+
+.action-btn.rename {
+  background-color: #f0f0f0;
+  color: #666;
+}
+
+.action-btn.delete {
+  background-color: #fdf0f0;
+  color: #e64340;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+  color: #999;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 15rpx;
+  color: #666;
+}
+
+.empty-desc {
+  font-size: 28rpx;
+  text-align: center;
+  padding: 0 60rpx;
+}
+
+/* 弹窗样式 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 20rpx;
+  width: 80%;
+  max-width: 600rpx;
+  padding: 40rpx;
+}
+
+.modal-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30rpx;
+  color: #333;
+}
+
+.modal-input {
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  font-size: 32rpx;
+  margin-bottom: 30rpx;
+}
+
+.modal-message {
+  font-size: 32rpx;
+  color: #666;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.modal-actions button {
+  flex: 1;
+  margin: 0;
+  font-size: 32rpx;
+}
+
+/* 合并词库选项 */
+.merge-options {
+  margin-bottom: 30rpx;
+}
+
+.merge-source,
+.merge-target {
+  margin-bottom: 20rpx;
+}
+
+.merge-label {
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.picker {
+  padding: 20rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  background-color: #f9f9f9;
+  font-size: 32rpx;
+  color: #333;
+}
+
+/* 确保弹窗中picker样式正确 */
+.merge-options .picker {
+  min-height: 80rpx;
+  display: flex;
+  align-items: center;
+}
+
+.plan-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+}
+
+.plan-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+}
+
+.plan-item {
+  display: flex;
+  align-items: center;
+  background-color: #f8f8f8;
+  padding: 25rpx;
+  border-radius: 12rpx;
+  border-left: 8rpx solid #667eea;
+}
+
+.plan-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+}
+
+.plan-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .plan-items {
+    grid-template-columns: 1fr;
+  }
+  
+  .under-construction {
+    padding: 60rpx 30rpx;
+  }
+  
+  .construction-icon {
+    font-size: 100rpx;
+  }
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 合并模式操作栏 */
+.merge-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  background-color: #ffffff;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.merge-text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.merge-buttons {
+  display: flex;
+  gap: 15rpx;
+}
+
+/* 词库列表样式 */
+.wordbook-list {
+  flex: 1;
+  padding: 20rpx;
+}
+
+.wordbook-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25rpx;
+  margin-bottom: 20rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.wordbook-item.merge-mode {
+  padding-left: 60rpx;
+  position: relative;
+}
+
+.wordbook-item.selected {
+  background-color: #e6f7ff;
+  border: 1px solid #1890ff;
+}
+
+.wordbook-info {
+  flex: 1;
+}
+
+.wordbook-name {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.wordbook-meta {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.wordbook-actions {
+  display: flex;
+  gap: 15rpx;
+}
+
+/* 选择框样式 */
+.select-checkbox {
+  position: absolute;
+  left: 20rpx;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid #d9d9d9;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  color: #ffffff;
+}
+
+.checkbox.checked {
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+
+/* 单词列表相关样式 */
+.header {
+  background-color: #ffffff;
+  padding: 15rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.search-bar {
+  position: relative;
+  margin-bottom: 20rpx;
+}
+
+.search-input {
+  width: 100%;
+  height: 70rpx;
+  padding-left: 80rpx;
+  background-color: #f8f8f8;
+  border-radius: 35rpx;
+  font-size: 28rpx;
+}
+
+.search-icon {
+  position: absolute;
+  left: 30rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 32rpx;
+}
+
+.filter-tabs {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 10rpx;
+}
+
+.filter-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  padding: 12rpx 24rpx;
+  margin-right: 20rpx;
+  font-size: 28rpx;
+  color: #666;
+  background-color: #f0f0f0;
+  border-radius: 30rpx;
+}
+
+.tab.active {
+  color: #fff;
+  background-color: #07c160;
+}
+
+.word-list {
+  flex: 1;
+  padding: 20rpx;
+}
+
+.word-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25rpx;
+  margin-bottom: 20rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.word-main {
+  flex: 1;
+}
+
+.word-text {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.word-translation {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.word-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 15rpx;
+}
+
+.status-badge {
+  padding: 6rpx 16rpx;
+  font-size: 24rpx;
+  border-radius: 20rpx;
+  color: #fff;
+}
+
+.status-badge.unstudied {
+  background-color: #8a8a8a;
+}
+
+.status-badge.studying {
+  background-color: #ff9800;
+}
+
+.status-badge.mastered {
+  background-color: #07c160;
+}
+
+.word-actions {
+  display: flex;
+  gap: 15rpx;
+}
+
+.action-btn {
+  width: 50rpx;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+}
+
+.action-btn.delete {
+  color: #ff4d4f;
+}
+
+/* 编辑模态框样式 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+.edit-modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border-radius: 30rpx 30rpx 0 0;
+  padding: 30rpx;
+  z-index: 999;
+  box-shadow: 0 -5rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.modal-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-close {
+  font-size: 48rpx;
+  color: #999;
+  width: 50rpx;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  margin-bottom: 30rpx;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 15rpx;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  border: 2rpx solid #e8e8e8;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+}
+
+.form-textarea {
+  min-height: 150rpx;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 20rpx;
+}
+
+/* 空状态样式 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+}
+
+.empty-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  margin-top: 30rpx;
+  width: 60%;
+}
+
+.btn-small {
+  background-color: #07c160;
+  color: #ffffff;
+  border-radius: 35rpx;
+  font-size: 28rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 底部操作按钮 */
+.bottom-actions {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20rpx;
+  gap: 15rpx;
+  background-color: #ffffff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary {
+  flex: 1;
+  min-width: 30%;
+  background-color: #07c160;
+  color: #ffffff;
+  border-radius: 35rpx;
+  font-size: 32rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+.btn-secondary {
+  flex: 1;
+  min-width: 20%;
+  background-color: #f0f0f0;
+  color: #666666;
+  border-radius: 35rpx;
+  font-size: 28rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+.btn-cancel {
+  background-color: #f0f0f0;
+  color: #666666;
+  border-radius: 35rpx;
+  font-size: 28rpx;
+}
+
+/* 禁用按钮样式 */
+.btn-disabled {
+  opacity: 0.5;
+}
+
+/* 停止冒泡 */
+.stop-propagation {
+  touch-action: none;
+}

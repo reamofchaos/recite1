@@ -1,0 +1,381 @@
+/* 词库详情页面样式 */
+.wordlist-detail-container {
+  padding-top: 60rpx;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* 导航栏 */
+.navigation-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30rpx;
+  height: 80rpx;
+  background-color: #fff;
+  border-bottom: 1rpx solid #e0e0e0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.nav-left {
+  width: 80rpx;
+}
+
+.back-icon {
+  font-size: 60rpx;
+  color: #333;
+}
+
+.nav-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+  text-align: center;
+}
+
+.nav-right {
+  width: 80rpx;
+  text-align: right;
+}
+
+.import-btn {
+  font-size: 28rpx;
+  color: #667eea;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  line-height: normal;
+}
+
+/* 词库信息 */
+.wordlist-info {
+  background-color: #fff;
+  padding: 30rpx;
+  margin: 20rpx;
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15rpx 0;
+  font-size: 28rpx;
+}
+
+.info-label {
+  color: #666;
+}
+
+.info-value {
+  color: #333;
+  font-weight: 500;
+}
+
+/* 加载中 */
+.loading-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx 0;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 6rpx solid #f3f3f3;
+  border-top: 6rpx solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 30rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 空状态 */
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+  color: #999;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-title {
+  font-size: 32rpx;
+  margin-bottom: 20rpx;
+  color: #666;
+}
+
+.empty-desc {
+  font-size: 28rpx;
+  color: #999;
+  text-align: center;
+}
+
+/* 单词列表 */
+.words-list {
+  flex: 1;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 20rpx 120rpx 20rpx;
+  /* 确保在iOS上显示滚动条 */
+}
+
+/* 自定义滚动条样式 */
+.words-list::-webkit-scrollbar {
+  width: 8rpx;
+}
+
+.words-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4rpx;
+}
+
+.words-list::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4rpx;
+}
+
+.words-list::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.word-item {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.word-content {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20rpx;
+}
+
+.word-index {
+  width: 50rpx;
+  height: 50rpx;
+  background-color: #667eea;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.word-info {
+  flex: 1;
+}
+
+.word-text {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.word-translation {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.5;
+}
+
+.word-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20rpx;
+}
+
+.action-btn {
+  font-size: 26rpx;
+  padding: 0 20rpx;
+  margin: 0;
+  line-height: 60rpx;
+  height: 60rpx;
+}
+
+.action-btn.edit {
+  color: #667eea;
+  background-color: #f0f0ff;
+}
+
+.action-btn.delete {
+  background-color: #fff1f0;
+  color: #ff4d4f;
+  border-color: #ffccc7;
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx;
+  background-color: #fff;
+  border-top: 1rpx solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.add-word-btn {
+  font-size: 32rpx;
+  line-height: 88rpx;
+  height: 88rpx;
+  margin: 0;
+  background-color: #667eea;
+}
+
+.import-wordlist-btn {
+  font-size: 32rpx;
+  line-height: 88rpx;
+  height: 88rpx;
+  margin: 0;
+  background-color: #fff;
+  color: #667eea;
+  border: 1rpx solid #667eea;
+}
+
+/* 弹窗样式 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.modal-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border-radius: 30rpx 30rpx 0 0;
+  z-index: 1000;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.modal-header {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #e0e0e0;
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.modal-body {
+  padding: 30rpx;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 15rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 10rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.modal-footer {
+  display: flex;
+  border-top: 1rpx solid #e0e0e0;
+}
+
+.modal-btn {
+  flex: 1;
+  font-size: 32rpx;
+  margin: 0;
+  padding: 25rpx 0;
+}
+
+.modal-btn.cancel {
+  color: #666;
+}
+
+.modal-btn.confirm {
+  color: #667eea;
+}
+
+/* 词库选择列表样式 */
+.wordlist-select {
+  max-height: 600rpx;
+  overflow-y: auto;
+}
+
+.wordlist-option {
+  padding: 30rpx;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  background-color: #fafafa;
+  transition: all 0.3s;
+}
+
+.wordlist-option:active {
+  background-color: #f0f0f0;
+  transform: scale(0.98);
+}
+
+.wordlist-option-name {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.wordlist-option-count {
+  font-size: 26rpx;
+  color: #999;
+}

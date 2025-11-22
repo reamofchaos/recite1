@@ -1,0 +1,440 @@
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-scrollable {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+}
+
+.camera {
+  width: 100%;
+  height: 100%;
+}
+
+.controls {
+  position: absolute;
+  bottom: 60rpx;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 60rpx;
+}
+
+.control-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.control-icon {
+  font-size: 48rpx;
+  margin-bottom: 10rpx;
+}
+
+.control-text {
+  font-size: 24rpx;
+}
+
+.capture-btn {
+  width: 120rpx;
+  height: 120rpx;
+  border: 6rpx solid white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.capture-inner {
+  width: 80rpx;
+  height: 80rpx;
+  background: white;
+  border-radius: 50%;
+}
+
+.capture-btn:active {
+  transform: scale(0.9);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+  z-index: 1000;
+}
+
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  width: 90%;
+  max-height: 80%;
+  background: white;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.close-btn {
+  font-size: 40rpx;
+  color: #999;
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.word-list {
+  max-height: 500rpx;
+  padding: 20rpx;
+  overflow: auto;
+}
+
+.word-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.word-text {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.word-translation {
+  font-size: 24rpx;
+  color: #666;
+  text-align: right;
+  padding-right: 20rpx;
+  flex-shrink: 0;
+  max-width: 60%;
+}
+
+/* 空状态样式 */
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 裁剪预览确认界面样式已移除 */
+
+.confirm-btn {
+  background-color: #07c160;
+  color: #fff;
+}
+
+.preview-image-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40rpx;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 12rpx;
+}
+
+.modal-actions {
+  display: flex;
+  padding: 30rpx;
+  gap: 20rpx;
+}
+
+.btn-secondary, .btn-primary {
+  flex: 1;
+  height: 80rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  border: none;
+}
+
+.btn-secondary {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.btn-primary {
+  background: #667eea;
+  color: white;
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+  z-index: 1001;
+}
+
+.loading.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid rgba(255, 255, 255, 0.3);
+  border-top: 4rpx solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 28rpx;
+}
+
+/* 图片编辑界面样式 */
+.image-editor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  z-index: 1002;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+}
+
+.image-editor.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 编辑界面头部 */
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx 40rpx;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.editor-title {
+  color: white;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+/* 编辑界面内容区域 */
+.editor-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40rpx;
+}
+
+/* 图片容器 */
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* 预览图片 */
+.preview-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* 裁剪框 */
+.crop-box {
+  position: absolute;
+  border: 2rpx solid #00B894;
+  box-sizing: border-box;
+  background: transparent;
+  cursor: move;
+  z-index: 10;
+}
+
+/* 裁剪框边框 */
+.crop-border {
+  position: absolute;
+  top: -2rpx;
+  left: -2rpx;
+  right: -2rpx;
+  bottom: -2rpx;
+  border: 1px dashed #00B894;
+  pointer-events: none;
+}
+
+/* 裁剪框控制点 */
+.control-point {
+  position: absolute;
+  width: 20rpx;
+  height: 20rpx;
+  background: white;
+  border: 2rpx solid #00B894;
+  border-radius: 50%;
+  z-index: 20;
+}
+
+.control-point.top-left {
+  top: -10rpx;
+  left: -10rpx;
+}
+
+.control-point.top-right {
+  top: -10rpx;
+  right: -10rpx;
+}
+
+.control-point.bottom-left {
+  bottom: -10rpx;
+  left: -10rpx;
+}
+
+.control-point.bottom-right {
+  bottom: -10rpx;
+  right: -10rpx;
+}
+
+/* 编辑操作区域 */
+.editor-actions {
+  margin-top: 30rpx;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* 尺寸控制 */
+.size-controls {
+  display: flex;
+  align-items: center;
+  gap: 40rpx;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15rpx 30rpx;
+  border-radius: 40rpx;
+}
+
+.size-btn {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background: #00B894;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.size-btn:active {
+  transform: scale(0.95);
+}
+
+.size-btn-text {
+  color: white;
+  font-size: 36rpx;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.size-label {
+  color: white;
+  font-size: 28rpx;
+}
+
+/* 编辑界面底部 */
+.editor-footer {
+  padding: 30rpx 40rpx;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  gap: 20rpx;
+}
+
+.editor-footer .btn-secondary,
+.editor-footer .btn-primary {
+  flex: 1;
+  height: 90rpx;
+  border-radius: 45rpx;
+  font-size: 32rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.editor-footer .btn-secondary {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.editor-footer .btn-primary {
+  background: #00B894;
+  color: white;
+}
