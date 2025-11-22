@@ -2,7 +2,6 @@
   <navigation-bar title="我的" back="{{false}}" color="black" background="#ffffff"></navigation-bar>
   
   <view class="content">
-    <!-- 用户信息卡片 -->
     <view class="user-card">
       <view class="avatar">👤</view>
       <view class="user-info">
